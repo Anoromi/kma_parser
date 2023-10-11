@@ -12,10 +12,12 @@ The program *seems* to work for both economists and SE.
 ### Aspects
 Some changes were made to the task:
   1. Resulting json file skips Faculty object.
-  2. Group might have multiple objects inside of it (2 different lectures, for example). As such a group was changed to an array of objects instead of a single object.
-  3. The program doesn't do any seaching inside a spreadsheet. It starts at 0 row, 0 col and goes from there.
-  4. I did some testing but not enough.
-  5. The program uses configs for specifying what kinds of specialties it is currently working on. This is used both for aliases and default specialties.
+  1. Group might have multiple objects inside of it (2 different lectures, for example). As such a group was changed to an array of objects instead of a single object.
+
+### Structure
+  1. The program doesn't do any seaching inside a spreadsheet. It starts at 0 row, 0 col and goes from there.
+  1. I did some testing but not enough.
+  1. The program uses configs for specifying what kinds of specialties it is currently working on. This is used both for aliases and default specialties.
 
 ## Rust
 Rust was chosen for this project because:
