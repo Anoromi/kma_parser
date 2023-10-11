@@ -1,0 +1,21 @@
+{
+  "default_specialty": "Економіка",
+  "specialties_configs": [
+    {
+      "name": "Економіка",
+      "aliases": []
+    },
+    {
+      "name": "Маркетинг",
+      "aliases": []
+    },
+    {
+      "name": "Менеджмент",
+      "aliases": []
+    },
+    {
+      "name": "Фінанси",
+      "aliases": []
+    }
+  ]
+}

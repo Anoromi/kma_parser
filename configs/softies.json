@@ -1,0 +1,9 @@
+{
+  "default_specialty": "ІПЗ",
+  "specialties_configs": [
+    {
+      "name": "ІПЗ",
+      "aliases": []
+    }
+  ]
+}
