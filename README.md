@@ -7,7 +7,7 @@ The program *seems* to work for both economists and SE.
 
 1. Insall Rust
 2. Run `cargo run -- parse -h` and follow cli guidelines from there.
-3. A call might look something like this `cargo run -- parse -c configs/softies.json --file spreadsheet/3.xlsx -o ./hell.json`
+3. A call might look something like this `cargo run -- parse -c configs/softies.json --file spreadsheet/3.xlsx -o ./hell.json`. The output will be written to hell.json file.
 
 ### Aspects
 Some changes were made to the task:
@@ -16,7 +16,7 @@ Some changes were made to the task:
 
 ### Structure
   1. The program doesn't do any seaching inside a spreadsheet. It starts at 0 row, 0 col and goes from there.
-  1. I did some testing but not enough.
+  1. I did some testing but not enough. To run test use command `cargo test`
   1. The program uses configs for specifying what kinds of specialties it is currently working on. This is used both for aliases and default specialties.
 
 ## Rust
