@@ -7,7 +7,8 @@ The program *seems* to work for both economists and SE.
 
 1. Insall Rust
 2. Run `cargo run -- parse -h` and follow cli guidelines from there.
-3. A call might look something like this `cargo run -- parse -c configs/softies.json --file spreadsheet/3.xlsx -o ./hell.json`. The output will be written to hell.json file.
+3. Specify a config for your specialty. They are located in configs directory. (configs/econ.json config/softies.json)
+4. A call might look something like this `cargo run -- parse -c configs/softies.json --file spreadsheet/3.xlsx -o ./hell.json`. The output will be written to hell.json file.
 
 ### Modifications
 Some changes were made to the task:
@@ -17,7 +18,8 @@ Some changes were made to the task:
 ### Structure
   1. The program doesn't do any seaching inside a spreadsheet. It starts at 0 row, 0 col and goes from there.
   1. I did some testing but not enough. To run test use command `cargo test`
-  1. The program uses configs for specifying what kinds of specialties it is currently working on. This is used both for aliases and default specialties.
+  1. The program uses configs for specifying what kinds of specialties it is currently working on. Default specialty is used when no specialty is found inside a course title.
+  1. Aliases are matched with or without a period on the end. A lowercase substring is considered to be enough to match alias with a name. For example 'марк' is a substring of 'Маректинг'. The caveat is that an alias can be mached to more than one specialty.
 
 ## Rust
 Rust was chosen for this project because:
