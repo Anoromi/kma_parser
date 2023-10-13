@@ -9,7 +9,7 @@ The program *seems* to work for both economists and SE.
 2. Run `cargo run -- parse -h` and follow cli guidelines from there.
 3. A call might look something like this `cargo run -- parse -c configs/softies.json --file spreadsheet/3.xlsx -o ./hell.json`. The output will be written to hell.json file.
 
-### Aspects
+### Modifications
 Some changes were made to the task:
   1. Resulting json file skips Faculty object.
   1. Group might have multiple objects inside of it (2 different lectures, for example). As such a group was changed to an array of objects instead of a single object.
@@ -30,7 +30,4 @@ Some of the libraries used were:
   2. nom - a parsing library used for parsing various strings.
   3. anyhow - a library for unified errors.
   4. serde - a framework for serialization.
-  5. clap - a framework for building a cli app.
-
-
-
+  5. clap - a framework for building cli apps.
