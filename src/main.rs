@@ -34,7 +34,6 @@ fn main() -> Result<()> {
             let output_file =
                 output.unwrap_or(format!("{}/result.json", env!("CARGO_MANIFEST_DIR")));
 
-            //dbg!(File::open(&output_file)?.metadata()?);
 
             parse_sheet(&file, &config, &output_file)?;
 
@@ -46,21 +45,8 @@ fn main() -> Result<()> {
 }
 
 fn parse_sheet(input_file: &str, config_file: &str, result_file: &str) -> Result<()> {
-    //let path = format!("{}/spreadsheet/Economists.xlsx", env!("CARGO_MANIFEST_DIR"));
-    //let path = format!("{}/spreadsheet/3.xlsx", env!("CARGO_MANIFEST_DIR"));
 
-    //let start = (0, 5);
-    //let end = (9, 72);
-
-    //let start = (9, 0);
-    //let end = (72, 5);
-
-    //let start = (0, 0);
-    //let end = (109, 5);
-
-    //let skip = (1, 0);
-
-    //let start_with_skip = (start.0 + skip.0, start.1 + skip.1);
+    let skip = (1, 0);
 
     let mut workbook: Xlsx<_> = open_workbook(input_file)?;
 
@@ -75,12 +61,8 @@ fn parse_sheet(input_file: &str, config_file: &str, result_file: &str) -> Result
         .worksheet_range(&first_sheet)
         .ok_or(Error::Msg("Couldn't get Sheet1"))??;
 
-    //dbg!(&sheet.height(), &sheet.width());
-    //return Ok(());
-    //let sheet = sheet.range(start_with_skip, end);
+    sheet.range(skip, sheet.end().unwrap());
 
-    //dbg!(sheet.get((0,4)).unwrap());
-    //return Ok(());
 
     let mut schedule = Schedule::new();
     search_for_table(sheet, &load_config(config_file)?, &mut schedule)?;
@@ -166,8 +148,4 @@ fn search_for_table(
     }
 
     Ok(())
-}
-
-struct CourseData {
-    specialties: Vec<String>,
 }

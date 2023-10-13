@@ -1,11 +1,9 @@
 use std::collections::BTreeMap;
 
 use anyhow::Result;
-use calamine::Error;
 use nom::{
     branch::alt,
     bytes::complete::{is_not, tag, tag_no_case, take, take_while1, take_while},
-    error::ParseError,
     IResult,
 };
 use serde::{Deserialize, Serialize};
@@ -26,17 +24,10 @@ impl SpecialtyConfig {
             potential_alias
         };
 
-        dbg!(&clean_pot_al);
 
         // Maybe optimize at some point
         let clean_name = self.name.to_lowercase();
         let clean_pot_al = clean_pot_al.to_lowercase();
-
-        dbg!(
-            &clean_name,
-            &clean_pot_al,
-            clean_name.starts_with(&clean_pot_al)
-        );
 
         if clean_name.starts_with(&clean_pot_al) {
             return true;
@@ -61,7 +52,6 @@ pub struct ConfigParams {
 impl ConfigParams {
     fn name_for_alias(&self, alias: &str) -> Option<String> {
         for course_alias_config in self.specialties_configs.iter() {
-            dbg!(&course_alias_config, alias);
             if course_alias_config.matches(alias) {
                 return Some(course_alias_config.name.clone());
             }
@@ -72,24 +62,19 @@ impl ConfigParams {
     fn identify_specialties_impl<'a>(&self, title: &'a str) -> IResult<&'a str, Vec<String>> {
         let mut result_courses: Vec<String> = vec![];
         let mut value = title;
-        dbg!(&value);
         while !value.is_empty() {
-            dbg!(&value);
             let (input, _) = is_not("(")(value)?;
 
             if input.is_empty() {
                 break;
             }
 
-            dbg!(&input);
             let (input, _) = nom::bytes::complete::take(1usize)(input)?;
 
-            dbg!(&input);
             let (rest, internal) = is_not(")")(input)?;
 
             let (_, items) = parse_title_specialties(internal)?;
 
-            dbg!(&items);
             for item in items {
                 if let Some(name) = self.name_for_alias(&item) {
                     result_courses.push(name);
@@ -102,8 +87,6 @@ impl ConfigParams {
             result_courses.push(self.default_specialty.clone());
         }
 
-        dbg!(&result_courses);
-        dbg!(&self.specialties_configs);
         assert!(result_courses.iter().all(|v| self
             .specialties_configs
             .iter()
@@ -158,7 +141,7 @@ impl ConfigParams {
         };
 
         for item in items {
-            if let Some(name) = self.name_for_alias(&item) {
+            if let Some(_) = self.name_for_alias(&item) {
                 return true;
             }
         }
@@ -167,14 +150,11 @@ impl ConfigParams {
 }
 
 fn parse_group_number(input: &str) -> IResult<&str, &str> {
-    //nom::bytes::complete::tag_no_case
-    dbg!(input);
 
     let (input, group) = alt((
         tag_no_case("лекція"),
         take_while1(|c: char| c.is_digit(10) || c == '-' || c == ','),
     ))(input)?;
-    //let (input, number) = take_till(|c: char| c.is_digit(10) || c == '-')(input)?;
 
     Ok((input, group))
 }
@@ -351,4 +331,5 @@ mod tests {
         assert!(alias.matches("М"));
         assert!(alias.matches("Ма"));
     }
+
 }

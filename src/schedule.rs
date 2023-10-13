@@ -24,15 +24,11 @@ impl Schedule {
 
         let specialty = self.specialties.get_mut(specialty_name).unwrap();
 
-        //dbg!(&specialty);
-
         if !specialty.classes.contains_key(class_name) {
             specialty.classes.insert(class_name.to_string(), ClassSchedule::new());
         }
         
         let class = specialty.classes.get_mut(class_name).unwrap();
-
-        //dbg!(&class);
 
         if !class.group_schedule.contains_key(group) {
             class.group_schedule.insert(group.to_string(), Vec::new());
