@@ -1,7 +1,7 @@
 
 # Kma parser
-The program parses xslx files for different specialties.
-The program *seems* to work for both economists and SE.
+The program parses xslx files for different specialties in the University.
+The program works for both economists and software engineers.
 
 ## How to run
 
